@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <link rel="stylesheet" href="{% static 'seller/css/font.css'%}">
+    <link rel="stylesheet" href="{% static 'seller/css/xadmin.css'%}">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'seller/lib/layui/layui.js'%}" charset="utf-8"></script>
+    <script type="text/javascript" src="{% static 'seller/js/xadmin.js'%}"></script>
+  </head>
+
+  <body class="layui-anim layui-anim-up">
+    <div class="x-body">
+      <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <span>商品详情</span>
+      </span>
+    </div>
+      <table class="layui-table">
+        <thead>
+          <tr>
+		    <th>商品id</th>
+            <th>商品编号</th>
+            <th>商品名称</th>
+            <th>商品原价</th>
+            <th>商品现价</th>
+            <th>商品库存</th>
+			<th>发布时间</th>
+            <th>商品描述</th>
+            <th>商品详情</th>
+			</tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ showgoods.id }}</td>
+			<td>{{ showgoods.goods_id }}</td>
+            <td>{{ showgoods.goods_name }}</td>
+            <td>{{ showgoods.goods_price }}</td>
+            <td>{{ showgoods.goods_now_price }}</td>
+            <td>{{ showgoods.goods_num }}</td>
+			<td>{{ showgoods.goods_show_time }}</td>
+			<td>{{ showgoods.goods_description }}</td>
+			<td>{{ showgoods.goods_content }}</td>
+          </tr>
+        </tbody>
+      </table>
+    <p style="font-size: 20px">商品图片</p>
+    <span style="font-size: 28px;color: orangered">
+
+        {%  for i in path %}
+            <img  style="width: 200px;height: 200px" src="{% static i %}" alt="">
+        {% endfor %}
+    </span>
+    </div>
+
+  </body>
+
+</html>

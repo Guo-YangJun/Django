@@ -1,0 +1,50 @@
+{% extends 'buy/base.html' %}
+{% load static %}
+{% block add %}
+    <div class="store">
+        <p>卖家免费开店</p>
+        <div class="store_box">
+        <form method="post" action=""  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="line">
+                <label>店铺名称</label>
+                <input type="text" name="username" class="input"/>
+            </div>
+            <div class="line">
+                <label>用户密码</label>
+                <input type="password" name="password" class="input"/>
+            </div>
+            <div class="line">
+                <label>用户名称</label>
+                <input type="text" name="nickname" class="input"/>
+            </div>
+            <div class="line">
+                <label>手机号码</label>
+                <input type="text" name="phone" class="input"/>
+            </div>
+            <div class="line">
+                <label>&nbsp&nbsp地&nbsp&nbsp&nbsp址&nbsp&nbsp</label>
+                <input type="text" name="address" class="input"/>
+            </div>
+            <div class="line">
+                <label>&nbsp&nbsp邮&nbsp&nbsp&nbsp箱&nbsp&nbsp</label>
+                <input type="text" name="email" class="input"/>
+            </div>
+            <div class="line">
+                <label>身&nbsp份&nbsp证&nbsp</label>
+                <input type="text" name="id_number" class="input"/>
+            </div>
+            <div class="line">
+                <label>店铺logo</label>
+                <input type="file" name="photo" class='input'/>
+            </div>
+            <div class="line">
+                <label></label>
+                <input type="submit" value="免费开店" class="btn"/>
+            </div>
+        </form>
+
+
+        </div>
+   </div>
+{% endblock %}

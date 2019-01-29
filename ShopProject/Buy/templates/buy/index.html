@@ -1,0 +1,22 @@
+{% extends 'buy/base.html'%}
+{% load static %}
+{% block add %}
+    <div id="lunbo"> </div>
+    <div class="shop_list">
+            <div class="type_list_box">
+                {% for i in data %}
+                <div class="box_list">
+                    <dl>
+                        <dt><a href="/buy/detail/{{ i.id }}/"><img style="height: 300px;width: 300px" src="{% static i.img  %}"/></a> </dt>
+                        <dd align="center">
+                            <p>&nbsp</p>
+                            <p><a href="/buy/detail/{{ i.id }}/">{{ i.name }}</a></p>
+                            <p>&nbsp</p>
+                            <p>￥{{ i.price }}元</p>
+                        </dd>
+                    </dl>
+                </div>
+                {% endfor %}
+            </div>
+    </div>
+{% endblock %}

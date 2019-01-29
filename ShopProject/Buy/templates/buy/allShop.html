@@ -1,0 +1,19 @@
+{% extends 'buy/base.html' %}
+{% load static %}
+{% block add %}
+{% for i in shop %}
+    <a href="/buy/sellerShop/{{ i.id }}/">
+    <div class="box_list" style="margin-right: -50px;padding-left: 50px">
+         <dl style="text-align: center">
+             <dt>
+                 <img src="{% static i.photo.url %}" style="height: 200px;width: 200px"/>
+             </dt>
+                 <dd>
+                     <p> <a href="#">店铺</a></p>
+                     <p>掌柜：{{ i.nickname }}<a href="#">进店>></a></p>
+                 </dd>
+         </dl>
+    </div>
+    </a>
+{% endfor %}
+{% endblock %}

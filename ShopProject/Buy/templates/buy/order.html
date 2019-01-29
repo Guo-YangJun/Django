@@ -1,0 +1,49 @@
+{% extends 'buy/base.html' %}
+{% load static %}
+{% block add %}
+    <form method="post" action="/buy/payMoney/">
+    {% csrf_token %}
+        <div class="cart_list">
+        <div class="cart_top">填写并核对订单信息</div>
+            <div class="cart_listbox" style="height: 50px;font-size: 24px;color: #5fbb78">
+                收货人信息:
+                <span style="margin-left: 20px">{{ Addr.recver }}</span>
+                <span>{{ Addr.phone }}</span>
+                <span style="margin-right: 50px">{{ Addr.address }}</span>
+                订单编号：<span style="margin-right: 50px">{{ order.number }}</span>
+                支付方式：
+                <span>{{ pay }}</span>
+            </div>
+        <div class="cart_listbox">
+             <table width="100%" cellpadding="0" cellspacing="0">
+                <tr >
+                    <th style='width:10%'>商品名称</th>
+                    <th style='width:25%'>商品缩略图</th>
+                    <th style='width:25%'>商品单价</th>
+                    <th style='width:25%'>商品数量</th>
+                    <th style='width:10%'>商品小计</th>
+                </tr>
+                 {% for i in all %}
+                <tr>
+                        <td><a href="#">{{ i.data.goodsName }}</a></td>
+                        <td><a href="#"><img src="{% static i.data.goodsPicture %}" /></a></td>
+                        <td>￥{{ i.data.goodsPrice }}元</td>
+                        <td>{{ i.data.goodsNum }}</td>
+                        <td>{{ i.money }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="5" style="text-align: right; padding-right: 10px;">总计：{{ money }}元</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="text-align: right; padding-right: 10px;">
+                        <a href="/buy/car/" style="float: left;font-size: 24px;color: #5fbb78">返回购物车修改</a>
+                        <input type="submit" value="提交订单" class="btn"  /></td>
+                        <input type="hidden" value="{{ money }}" class="btn" name="money"  />
+                        <input type="hidden" value="{{ order.number }}" class="btn" name="number"  />
+                </tr>
+            </table>
+        </div>
+    </div>
+    </form>
+{% endblock %}

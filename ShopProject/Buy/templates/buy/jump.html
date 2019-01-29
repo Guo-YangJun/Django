@@ -1,0 +1,35 @@
+{% extends 'buy/base.html' %}
+{% load static %}
+{% block add %}
+    <div class="cart_list">
+        <div class="cart_top">{{ good.goods_name }}已经成功添加到购物车</div>
+            <div class="cart_listbox">
+            <table width="100%" cellpadding="0" cellspacing="0" border='0px'>
+                <tr>
+                    <th width='10%'>商品名称</th>
+                    <th width='20%'>商品缩略图</th>
+                    <th width='20%'>商品单价</th>
+                    <th width='20%'>商品数量</th>
+                    <th width='20%'>商品小计</th>
+                </tr>
+                    <form method="post">
+                        {% csrf_token %}
+                        <tr>
+                        <td><a href="#">{{ good.goods_name }}</a></td>
+                        <td><a href="#"><img src="{% static image %}" /></a></td>
+                        <td>￥{{ good.goods_price }}元</td>
+                        <td>{{ count }}</td>
+                        <td>￥{{ money }}</td>
+                    </form>
+                </tr>
+            </table>
+            <div>
+                    <a class="btn" href = "/buy/detail/{{ good.id }}/">返回详情页</a>
+                    <a class="btn" href = "/buy/car/">去购物车结算</a>
+            </div>
+        </div>
+        </div>
+
+    </div>
+
+{% endblock %}

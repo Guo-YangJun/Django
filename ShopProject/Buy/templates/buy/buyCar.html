@@ -1,0 +1,109 @@
+{% extends 'buy/base.html' %}
+{% load static %}
+{% block add %}
+    <div class="cart_list">
+        <div class="cart_top" style="display: inline-block">
+            我的购物车
+        </div>
+        <div class="cart_listbox">
+            <form method="post" action="/buy/orderAdd/">
+                {% csrf_token %}
+            <table width="100%" cellpadding="0" cellspacing="0" border='0px'>
+            <thead>
+                <tr>
+                    <th width='10%'><input style="width: 20px;height: 20px;margin-left: 10px" type="checkbox" id="all" /></th>
+                    <th width='10%'>商品名称</th>
+                    <th width='20%'>商品缩略图</th>
+                    <th width='10%'>商品单价</th>
+                    <th width='20%'>商品数量</th>
+                    <th width='20%'>商品小计</th>
+                    <th width='10%'>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tb">
+                    {% if data %}
+                        {% for v in data %}
+                        <tr>
+                        <td><input name="name_{{ v.good.id }}" value="{{ v.good.id }}"  style="width: 20px;height: 20px;margin-left: 60px;" type="checkbox" class="data"/></td>
+                        <td><a href="#">{{ v.good.name }}</a></td>
+                        <td><a href="#"><img src="{% static v.good.picture.url %}" /></a></td>
+                        <td>￥{{ v.good.price }}元</td>
+                        <td>{{ v.good.num }}</td>
+                        <td>￥{{ v.money }}</td>
+                        <td><a href="/buy/delete/{{ v.good.goodId }}/">删除</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                    <td colspan="6" style="text-align: center;">购物车空空如也~~，请快去购物吧！</td>
+                    </tr>
+                    {% endif %}
+            </tbody>
+            </table>
+            <div class="line">
+            <label>选择收货地址</label>
+                <select name="address" id="" class="input">
+                    {% for i in add %}
+                        <option value="{{ i.id }}" class="input">{{ i.recver }}---{{ i.address }}---{{ i.phone }}</option>
+                    {% endfor %}
+                </select>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <label>支付方式</label>
+                <select name="pay" id="" class="input">
+                        <option value="支付宝" class="input">支付宝</option>
+                        <option value="微信" class="input">微信</option>
+                        <option value="银行卡" class="input">银行卡</option>
+                </select>
+            </div>
+            <div class="goon">
+                <div class="clearcart">
+                    <a href="/buy/clear/" style="font-size: 24px">清空购物车</a>
+                </div>
+                    &nbsp<a href="/buy/address/" style="font-size: 24px">添加收货地址</a>&nbsp&nbsp&nbsp
+                    <a href="/buy/addressList/" style="font-size: 24px">管理收货地址</a>
+                <div class="totalprice">
+                 &nbsp总计{{ pay }}元
+                </div>
+            </div>
+            <div class="order">
+                 <input type="submit" value="立即下单" class="btn" />
+            </div>
+            </form>
+        </div>
+    </div>
+<script>
+ window.onload = function () {
+        var da = document.querySelectorAll("thead tr th input")[0];
+        var xiao = document.querySelectorAll("tbody tr td input");
+        da.onclick = function () {
+            if (da.checked){
+                for (var i = 0;i<xiao.length;i++){
+                    xiao[i].checked = true;
+                    xiao[i].name="ok"+i
+                }
+            }
+            else {
+                for (var j = 0;j<xiao.length;j++){
+                    xiao[j].checked = false;
+                    xiao[j].name="other"+j
+                }
+            }
+        };
+        for (var i = 0;i<xiao.length;i++){
+            xiao[i].onclick = function () {
+                var a = true;
+                for (var j = 0;j<xiao.length;j++){
+                    if (!xiao[j].checked){
+                        xiao[j].name='other'+j;
+                        a = false;
+                    }
+                    else{
+                        xiao[j].name='ok'+j
+                    }
+                }
+                da.checked = a;
+            }
+        }
+    }
+</script>
+{% endblock %}

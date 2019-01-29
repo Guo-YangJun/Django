@@ -1,0 +1,38 @@
+{% extends 'buy/base.html' %}
+{% load static %}
+{% block add %}
+    <div class="store">
+        {% if addChange %}
+        <p>修改地址</p>
+        {% else %}
+        <p>添加地址</p>
+        {% endif %}
+        <div class="store_box">
+        <form method="post" action="" >
+            {% csrf_token %}
+            <div class="line">
+            <label>&nbsp收&nbsp货&nbsp人&nbsp：</label>
+                <input type="text" name="recver" value="{{ addChange.recver }}"  class="input" />
+            </div>
+            <div class="line">
+            <label>手机号码：</label>
+                 <input type="text" name="phone" class="input" value="{{ addChange.phone }}" />
+            </div>
+            <div class="line">
+            <label>收货地址：</label>
+                 <input type="text" name="address" class="input" value="{{ addChange.address }}" />
+            </div>
+            <div class="line">
+                {% if addChange %}
+                <input type="submit" value="修改" class="btn"/>
+                {% else %}
+                <input type="submit" value="添加" class="btn"/>
+                {% endif %}
+            </div>
+            <div class="line">
+                <a href="/buy/car/" style="font-size: 24px;margin-left: 10px">返回购物车</a>
+            </div>
+        </form>
+        </div>
+   </div>
+{% endblock %}
